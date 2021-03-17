@@ -9,7 +9,7 @@ namespace ILDynamics
 {
     public class ILConstant : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public Type Type { get; private set; } 
         public ILObject Constant { get; private set; }
 
@@ -23,7 +23,7 @@ namespace ILDynamics
             return new ILConstant() { ILFunction = val.ILFunction, Type = val.Type, Constant = val };
         }
 
-        public static ILConstant From<T>(ILFunction f, T v)
+        public static ILConstant From<T>(ILMethod f, T v)
         {
             ILConstant<T> val = new ILConstant<T>(f, v);
             return new ILConstant() { ILFunction = val.ILFunction, Type = val.Type, Constant = val };
@@ -42,12 +42,12 @@ namespace ILDynamics
 
     public class ILConstant<T> : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public Type Type { get; private set; }
 
         public readonly T Value;
 
-        public ILConstant(ILFunction f, T val)
+        public ILConstant(ILMethod f, T val)
         {
             ILFunction = f;
             Type = typeof(T);

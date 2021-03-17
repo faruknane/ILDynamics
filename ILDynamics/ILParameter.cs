@@ -9,11 +9,11 @@ namespace ILDynamics
 {
     public class ILParameter : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public ILParameter(ILFunction function, Type type)
+        public ILParameter(ILMethod function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;

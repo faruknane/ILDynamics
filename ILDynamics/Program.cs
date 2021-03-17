@@ -6,7 +6,7 @@ namespace ILDynamics
     {
         static void Main(string[] args)
         {
-            ILFunction f = new ILFunction(typeof(int));
+            ILMethod f = new ILMethod(typeof(int));
             var p = f.NewParameter(typeof(int));
             var v = f.NewVariable(typeof(int));
             v.Assign(f.Sum(p, f.Constant(2), f.Constant(3)));

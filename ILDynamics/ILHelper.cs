@@ -14,7 +14,7 @@ namespace ILDynamics
         {
             if (t == typeof(float))
                 codes.Emit(OpCodes.Ldind_R4);
-            else if(t == typeof(int))
+            else if (t == typeof(int))
                 codes.Emit(OpCodes.Ldind_I4);
             else
                 codes.Emit(OpCodes.Ldind_Ref);

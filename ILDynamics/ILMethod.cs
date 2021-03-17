@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
-    public class ILFunction
+    public class ILMethod
     {
         public Dictionary<ILParameter, int> ParameterIndex { get; }
         public List<Type> ParameterTypes { get; }
@@ -16,7 +16,7 @@ namespace ILDynamics
 
         public Type ReturnType;
 
-        public ILFunction(Type returntype)
+        public ILMethod(Type returntype)
         {
             ParameterTypes = new List<Type>();
             ParameterIndex = new Dictionary<ILParameter, int>();

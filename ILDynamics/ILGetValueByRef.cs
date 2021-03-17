@@ -8,11 +8,11 @@ namespace ILDynamics
 {
     public class ILGetValueByRef : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public Type Type;
         public ILObject Object;
 
-        public ILGetValueByRef(ILFunction f, ILObject obj, Type t)
+        public ILGetValueByRef(ILMethod f, ILObject obj, Type t)
         {
             this.ILFunction = f;
             this.Type = t;

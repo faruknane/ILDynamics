@@ -9,9 +9,9 @@ namespace ILDynamics
 {
     public class ILOperatorPlus : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public ILObject[] Values;
-        public ILOperatorPlus(ILFunction f, params ILObject[] values)
+        public ILOperatorPlus(ILMethod f, params ILObject[] values)
         {
             this.ILFunction = f;
             this.Values = values;

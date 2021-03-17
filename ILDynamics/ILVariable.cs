@@ -5,11 +5,11 @@ namespace ILDynamics
 {
     public class ILVariable : ILObject
     {
-        public ILFunction ILFunction { get; private set; }
+        public ILMethod ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public ILVariable(ILFunction function, Type type)
+        public ILVariable(ILMethod function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;
