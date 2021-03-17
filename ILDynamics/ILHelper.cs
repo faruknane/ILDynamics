@@ -14,7 +14,7 @@ namespace ILDynamics
         {
             if (t == typeof(float))
                 codes.Emit(OpCodes.Ldind_R4);
-            if (t == typeof(int))
+            else if(t == typeof(int))
                 codes.Emit(OpCodes.Ldind_I4);
             else
                 codes.Emit(OpCodes.Ldind_Ref);
@@ -25,7 +25,7 @@ namespace ILDynamics
         {
             if (t == typeof(float))
                 codes.Emit(OpCodes.Stind_R4);
-            if (t == typeof(int))
+            else if(t == typeof(int))
                 codes.Emit(OpCodes.Stind_I4);
             else
                 codes.Emit(OpCodes.Stind_Ref);
@@ -44,7 +44,7 @@ namespace ILDynamics
             {
                 codes.Emit(OpCodes.Ldc_I4, (int)(object)val);
             }
-            if (typeof(T) == typeof(float))
+            else if(typeof(T) == typeof(float))
             {
                 codes.Emit(OpCodes.Ldc_R4, (float)(object)val);
             }

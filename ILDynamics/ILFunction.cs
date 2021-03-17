@@ -48,9 +48,9 @@ namespace ILDynamics
 
             ModuleBuilder demoModule = demoAssembly.DefineDynamicModule(asmName.Name);
 
-            TypeBuilder demoType = demoModule.DefineType("DemoType", TypeAttributes.Public);
+            TypeBuilder demoType = demoModule.DefineType("DynamicType", TypeAttributes.Public);
 
-            MethodBuilder factory = demoType.DefineMethod("Factory",
+            MethodBuilder factory = demoType.DefineMethod("DynamicMethod",
                 MethodAttributes.Public | MethodAttributes.Static,
                 ReturnType,
                 ParameterTypes.ToArray());
@@ -60,7 +60,7 @@ namespace ILDynamics
             OpCodes.Generate(il);
 
             Type dt = demoType.CreateType();
-            return dt.GetMethod("Factory");
+            return dt.GetMethod("DynamicMethod");
         }
 
         public ILObject Constant<T>(T v)
