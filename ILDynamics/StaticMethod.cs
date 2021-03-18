@@ -16,6 +16,8 @@ namespace ILDynamics
 
         public Type ReturnType;
 
+        private MethodInfo methodInfo;
+
         public StaticMethod(Type returntype)
         {
             ParameterTypes = new List<Type>();
@@ -26,6 +28,14 @@ namespace ILDynamics
             OpCodes = new ILOpCodes();
 
             this.ReturnType = returntype;
+        }
+
+        public object this[params object[] objs]
+        {
+            get
+            {
+                return methodInfo.Invoke(null, objs);
+            }
         }
 
         public void Return()
@@ -41,6 +51,9 @@ namespace ILDynamics
 
         public MethodInfo Create()
         {
+            if (methodInfo != null)
+                throw new Exception("The static method is already created!");
+
             AssemblyName asmName = new AssemblyName();
             asmName.Name = "DynamicILAssembly";
 
@@ -60,7 +73,7 @@ namespace ILDynamics
             OpCodes.Generate(il);
 
             Type dt = demoType.CreateType();
-            return dt.GetMethod("DynamicMethod");
+            return methodInfo = dt.GetMethod("DynamicMethod");
         }
 
         public ILObject Constant<T>(T v)

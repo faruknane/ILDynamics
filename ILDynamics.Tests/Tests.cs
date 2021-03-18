@@ -20,7 +20,7 @@ namespace ILDynamics.Tests
 
             var method = f.Create();
 
-            int val = (int)method.Invoke(null, new object[] { 10 }); 
+            int val = (int)f[10]; // execute the method!
             Assert.AreEqual(val, 25);
         }
 
@@ -38,7 +38,7 @@ namespace ILDynamics.Tests
 
             var method = f.Create();
 
-            int val = (int)method.Invoke(null, new object[] { 10 });
+            int val = (int)f[10];
             Assert.AreEqual(val, 15);
         }
 
@@ -55,7 +55,7 @@ namespace ILDynamics.Tests
 
             var method = f.Create();
 
-            int val = (int)method.Invoke(null, new object[] { });
+            int val = (int)f[null];
             Assert.AreEqual(val, 3);
         }
     }
