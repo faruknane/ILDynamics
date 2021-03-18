@@ -4,7 +4,7 @@ A Library for dynamic method generation for .NET!
 ## Features & Usages
 - Supports Static Method Creation
 ```csharp
- Method<int> f = new Method<int>();
+Method<int> f = new Method<int>();
 var p = f.NewParam<int>();
 var v = f.NewVar<int>();
 
