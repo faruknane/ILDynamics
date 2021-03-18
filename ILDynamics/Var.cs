@@ -3,13 +3,13 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
-    public class ILVar : ILObject, ILReffable
+    public class Var : ILObject, IReffable
     {
-        public ILMethod ILFunction { get; private set; }
+        public StaticMethod ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public ILVar(ILMethod function, Type type)
+        public Var(StaticMethod function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;

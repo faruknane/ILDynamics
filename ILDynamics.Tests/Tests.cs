@@ -10,7 +10,7 @@ namespace ILDynamics.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            ILMethod f = new ILMethod(typeof(int));
+            StaticMethod f = new StaticMethod(typeof(int));
             var p = f.NewParameter(typeof(int));
             var v = f.NewVariable(typeof(int));
             v.Assign(f.Sum(p, f.Constant(2), f.Constant(3)));
@@ -22,9 +22,27 @@ namespace ILDynamics.Tests
         }
 
         [TestMethod]
+        public void TestMethod2()
+        {
+            StaticMethod f = new StaticMethod(typeof(int));
+
+            var v = f.NewVariable(typeof(int));
+            v.Assign(f.Sum(f.Constant(2), f.Constant(3)));
+
+            var p = f.NewParameter(typeof(int));
+
+            f.Return(f.Sum(v, p));
+
+            var method = f.Create();
+
+            int val = (int)method.Invoke(null, new object[] { 10 });
+            Assert.AreEqual(val, 15);
+        }
+
+        [TestMethod]
         public void TestRef()
         {
-            ILMethod f = new ILMethod(typeof(int));
+            StaticMethod f = new StaticMethod(typeof(int));
             var a = f.NewVariable(typeof(int));
             a.Assign(f.Constant(5));
 

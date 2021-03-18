@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class ILRefVar : ILVar, ILReffable
+    public class RefVar : Var, IReffable
     {
-        public ILReffable Var;
+        public IReffable Var;
         public Type VarType;
 
-        public ILRefVar(ILMethod method, ILReffable v) : base(method, PointerOf(v.Type))
+        public RefVar(StaticMethod method, IReffable v) : base(method, PointerOf(v.Type))
         {
             this.Var = v;
             this.VarType = v.Type;
             v.LoadAddress();
             this.Store();
         }
-
 
         public void RefAssign(ILObject val)
         {

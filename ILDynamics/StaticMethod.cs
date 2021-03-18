@@ -5,23 +5,23 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
-    public class ILMethod
+    public class StaticMethod
     {
-        public Dictionary<ILParam, int> ParameterIndex { get; }
+        public Dictionary<Param, int> ParameterIndex { get; }
         public List<Type> ParameterTypes { get; }
-        public Dictionary<ILVar, int> VariableIndex { get; }
+        public Dictionary<Var, int> VariableIndex { get; }
         public List<Type> VariableTypes { get; }
 
         internal ILOpCodes OpCodes;
 
         public Type ReturnType;
 
-        public ILMethod(Type returntype)
+        public StaticMethod(Type returntype)
         {
             ParameterTypes = new List<Type>();
-            ParameterIndex = new Dictionary<ILParam, int>();
+            ParameterIndex = new Dictionary<Param, int>();
 
-            VariableIndex = new Dictionary<ILVar, int>();
+            VariableIndex = new Dictionary<Var, int>();
             VariableTypes = new List<Type>();
             OpCodes = new ILOpCodes();
 
@@ -50,7 +50,7 @@ namespace ILDynamics
 
             TypeBuilder demoType = demoModule.DefineType("DynamicType", TypeAttributes.Public);
 
-            MethodBuilder factory = demoType.DefineMethod("DynamicMethod",
+            System.Reflection.Emit.MethodBuilder factory = demoType.DefineMethod("DynamicMethod",
                 MethodAttributes.Public | MethodAttributes.Static,
                 ReturnType,
                 ParameterTypes.ToArray());
@@ -65,25 +65,25 @@ namespace ILDynamics
 
         public ILObject Constant<T>(T v)
         {
-            return new ILConstant<T>(this, v);
+            return new Constant<T>(this, v);
         }
 
         public ILObject Sum(params ILObject[] objs)
         {
-            return new ILOperatorPlus(this, objs);
+            return new OperatorPlus(this, objs);
         }
 
         public ILObject GetValueByRef(ILObject obj, Type t)
         {
-            return new ILGetValueByRef(this, obj, t);
+            return new GetValueByRef(this, obj, t);
         }
 
-        public ILRefVar CreateReference(ILReffable v)
+        public RefVar CreateReference(IReffable v)
         {
-            return new ILRefVar(this, v);
+            return new RefVar(this, v);
         }
 
-        public virtual int NewParameter(ILParam ilParameter)
+        public virtual int NewParameter(Param ilParameter)
         {
             if(ParameterIndex.ContainsKey(ilParameter))
                 throw new Exception("You can't add the same parameter twice!");
@@ -92,12 +92,12 @@ namespace ILDynamics
             return ParameterIndex[ilParameter] = ParameterIndex.Count;
         }
 
-        public ILParam NewParameter(Type t)
+        public Param NewParameter(Type t)
         {
-            return new ILParam(this, t);
+            return new Param(this, t);
         }
 
-        public virtual int NewVariable(ILVar iLVariable)
+        public virtual int NewVariable(Var iLVariable)
         {
             if (VariableIndex.ContainsKey(iLVariable))
                 throw new Exception("You can't add the same variable twice!");
@@ -107,9 +107,9 @@ namespace ILDynamics
             return VariableIndex[iLVariable] = VariableIndex.Count;
         }
 
-        public ILVar NewVariable(Type t)
+        public Var NewVariable(Type t)
         {
-            return new ILVar(this, t);
+            return new Var(this, t);
         }
     }
 }

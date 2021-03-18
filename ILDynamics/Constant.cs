@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class ILConstant<T> : ILObject
+    public class Constant<T> : ILObject
     {
-        public ILMethod ILFunction { get; private set; }
+        public StaticMethod ILFunction { get; private set; }
         public Type Type { get; private set; }
 
         public readonly T Value;
 
-        public ILConstant(ILMethod f, T val)
+        public Constant(StaticMethod f, T val)
         {
             ILFunction = f;
             Type = typeof(T);

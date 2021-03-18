@@ -2,7 +2,7 @@
 
 namespace ILDynamics
 {
-    public interface ILReffable
+    public interface IReffable
     {
         public Type Type { get; }
         public void Load();
