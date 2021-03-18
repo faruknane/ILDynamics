@@ -2,7 +2,7 @@
 A Library for dynamic method generation for .NET!
 
 ## Example Usages
-- Supports Static Method Creation!
+- Supports Static Method Creation
 ```csharp
 StaticMethod f = new StaticMethod(typeof(int));
 var p = f.NewParameter(typeof(int));
@@ -18,7 +18,7 @@ int val = (int)method.Invoke(null, new object[] { 10 });
 Assert.AreEqual(val, 25);
 ```
 
-- Supports Parameter and Variable definiton in everywhere!
+- Supports Parameter and Variable definition anywhere 
 ```csharp
 StaticMethod f = new StaticMethod(typeof(int));
 var v = f.NewVariable(typeof(int));
