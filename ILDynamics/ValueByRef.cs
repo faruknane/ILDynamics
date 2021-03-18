@@ -9,20 +9,18 @@ namespace ILDynamics
     public class ValueByRef : ILObject
     {
         public StaticMethod ILFunction { get; private set; }
-        public Type Type;
-        public ILObject Object;
+        public IReffable Object;
 
-        public ValueByRef(StaticMethod f, ILObject obj, Type t)
+        public ValueByRef(StaticMethod f, IReffable obj)
         {
             this.ILFunction = f;
-            this.Type = t;
             this.Object = obj;
         }
 
         public override void Load()
         {
             Object.Load();
-            ILHelper.LoadValueByRef(ILFunction.OpCodes, Type);
+            ILHelper.LoadValueByRef(ILFunction.OpCodes, this.Object.Type);
         }
 
         public override void Store()
