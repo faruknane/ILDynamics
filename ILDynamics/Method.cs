@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ILDynamics.Operators;
+using ILDynamics.Ops;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -6,9 +8,9 @@ using System.Reflection.Emit;
 namespace ILDynamics
 {
 
-    public class StaticMethod<T> : StaticMethod
+    public class Method<T> : Method
     {
-        public StaticMethod() : base(typeof(T))
+        public Method() : base(typeof(T))
         {
 
         }
@@ -23,7 +25,7 @@ namespace ILDynamics
 
     }
 
-    public class StaticMethod
+    public class Method
     {
         public Dictionary<Param, int> ParameterIndex { get; }
         public List<Type> ParameterTypes { get; }
@@ -36,7 +38,7 @@ namespace ILDynamics
 
         private MethodInfo methodInfo;
 
-        public StaticMethod(Type returntype)
+        public Method(Type returntype)
         {
             ParameterTypes = new List<Type>();
             ParameterIndex = new Dictionary<Param, int>();
@@ -99,9 +101,24 @@ namespace ILDynamics
             return new Constant<T>(this, v);
         }
 
-        public ILObject Sum(params ILObject[] objs)
+        public ILObject Add(params ILObject[] objs)
         {
-            return new OpPlus(this, objs);
+            return new OpAdd(this, objs);
+        }
+
+        public ILObject Sub(ILObject val1, ILObject val2)
+        {
+            return new OpSub(this, val1, val2);
+        }
+
+        public ILObject Mul(params ILObject[] objs)
+        {
+            return new OpMul(this, objs);
+        }
+
+        public ILObject Div(ILObject val1, ILObject val2)
+        {
+            return new OpDiv(this, val1, val2);
         }
 
         public ILObject GetValueByRef(IReffable obj)

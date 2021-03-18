@@ -5,11 +5,11 @@ namespace ILDynamics
 {
     public class Var : ILObject, IReffable
     {
-        public StaticMethod ILFunction { get; private set; }
+        public Method ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public Var(StaticMethod function, Type type)
+        public Var(Method function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;

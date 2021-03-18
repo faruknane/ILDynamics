@@ -7,7 +7,7 @@ namespace ILDynamics
 
         static void Main(string[] args)
         {
-            StaticMethod f = new StaticMethod<int>();
+            Method f = new Method<int>();
             var a = f.NewVar(typeof(int));
             a.Assign(f.Constant(5));
 

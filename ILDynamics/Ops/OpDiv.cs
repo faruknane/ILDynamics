@@ -5,31 +5,31 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics
+namespace ILDynamics.Ops
 {
-    public class Constant<T> : ILObject
+    public class OpDiv : ILObject
     {
         public Method ILFunction { get; private set; }
-        public Type Type { get; private set; }
 
-        public readonly T Value;
+        public ILObject Val1, Val2;
 
-        public Constant(Method f, T val)
+        public OpDiv(Method f, ILObject val1, ILObject val2)
         {
-            ILFunction = f;
-            Type = typeof(T);
-            Value = val;
+            this.ILFunction = f;
+            this.Val1 = val1;
+            this.Val2 = val2;
         }
 
         public override void Load()
         {
-            ILHelper.LoadConstant<T>(ILFunction.OpCodes, Value);
+            Val1.Load();
+            Val2.Load();
+            ILFunction.OpCodes.Emit(OpCodes.Div);
         }
 
         public override void Store()
         {
             throw new NotImplementedException();
         }
-
     }
 }

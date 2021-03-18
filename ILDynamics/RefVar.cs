@@ -10,14 +10,14 @@ namespace ILDynamics
     {
         public Type VarType;
 
-        public RefVar(StaticMethod method, IReffable v) : base(method, PointerOf(v.Type))
+        public RefVar(Method method, IReffable v) : base(method, PointerOf(v.Type))
         {
             this.VarType = v.Type;
             v.LoadAddress();
             this.Store();
         }
 
-        public RefVar(StaticMethod method, Type t) : base(method, PointerOf(t))
+        public RefVar(Method method, Type t) : base(method, PointerOf(t))
         {
             this.VarType = t;
         }

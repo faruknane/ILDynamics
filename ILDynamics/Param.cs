@@ -9,11 +9,11 @@ namespace ILDynamics
 {
     public class Param : ILObject, IReffable
     {
-        public StaticMethod ILFunction { get; private set; }
+        public Method ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public Param(StaticMethod function, Type type)
+        public Param(Method function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;

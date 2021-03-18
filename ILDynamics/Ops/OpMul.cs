@@ -5,18 +5,18 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics
+namespace ILDynamics.Ops
 {
-    public class OpPlus : ILObject
+    public class OpMul : ILObject
     {
-        public StaticMethod ILFunction { get; private set; }
+        public Method ILFunction { get; private set; }
         public ILObject[] Values;
-        public OpPlus(StaticMethod f, params ILObject[] values)
+        public OpMul(Method f, params ILObject[] values)
         {
             this.ILFunction = f;
             this.Values = values;
         }
-        
+
         public override void Load()
         {
             Values[0].Load();
@@ -25,7 +25,7 @@ namespace ILDynamics
             {
                 var item = Values[i];
                 item.Load();
-                ILFunction.OpCodes.Emit(OpCodes.Add);
+                ILFunction.OpCodes.Emit(OpCodes.Mul);
             }
         }
 

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics
+namespace ILDynamics.Operators
 {
     public class OpValueByRef : ILObject
     {
-        public StaticMethod ILFunction { get; private set; }
+        public Method ILFunction { get; private set; }
         public IReffable Object;
 
-        public OpValueByRef(StaticMethod f, IReffable obj)
+        public OpValueByRef(Method f, IReffable obj)
         {
             this.ILFunction = f;
             this.Object = obj;
