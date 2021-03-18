@@ -4,7 +4,7 @@ A Library for dynamic method generation for .NET!
 ## Example Usages
 - Supports Static Method Creation
 ```csharp
-StaticMethod f = new StaticMethod(typeof(int));
+StaticMethod<int> f = new StaticMethod<int>();
 var p = f.NewParam(typeof(int));
 var v = f.NewVar(typeof(int));
 
@@ -14,13 +14,13 @@ f.Return(f.Sum(v, p));
 
 f.Create();
 
-int val = (int)f[10]; // execute the method!
+int val = f[10]; // execute the method!
 Assert.AreEqual(val, 25);
 ```
 
 - Supports Parameter and Variable Definition anywhere 
 ```csharp
-StaticMethod f = new StaticMethod(typeof(int));
+StaticMethod<int> f = new StaticMethod<int>();
 var v = f.NewVar(typeof(int));
 
 v.Assign(f.Sum(f.Constant(2), f.Constant(3)));
@@ -31,13 +31,13 @@ f.Return(f.Sum(v, p));
 
 f.Create();
 
-int val = (int)f[10];
+int val = f[10];
 Assert.AreEqual(val, 15);
 ```
 
 - Supports Reference Types
 ```csharp
-StaticMethod f = new StaticMethod(typeof(int));
+StaticMethod<int> f = new StaticMethod<int>();
 var a = f.NewVar(typeof(int));
 a.Assign(f.Constant(5));
 
@@ -47,12 +47,12 @@ f.Return(a);
 
 f.Create();
 
-int val = (int)f[null];
+int val = f[null];
 Assert.AreEqual(val, 3);
 ```
 - Supports Referance Operator
-```
-StaticMethod f = new StaticMethod(typeof(int));
+```csharp
+StaticMethod<int> f = new StaticMethod<int>();
 var a = f.NewVar(typeof(int));
 a.Assign(f.Constant(5));
 
@@ -69,6 +69,6 @@ f.Return(f.Sum(a, c));
 
 f.Create();
 
-int val = (int)f[null];
+int val = f[null];
 Assert.AreEqual(val, 8);
 ```
