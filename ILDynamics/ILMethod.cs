@@ -65,7 +65,7 @@ namespace ILDynamics
 
         public ILObject Constant<T>(T v)
         {
-            return ILConstant.From(this, v);
+            return new ILConstant<T>(this, v);
         }
 
         public ILObject Sum(params ILObject[] objs)
