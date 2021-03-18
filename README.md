@@ -18,7 +18,7 @@ int val = (int)f[10]; // execute the method!
 Assert.AreEqual(val, 25);
 ```
 
-- Supports Parameter and Variable definition anywhere 
+- Supports Parameter and Variable Definition anywhere 
 ```csharp
 StaticMethod f = new StaticMethod(typeof(int));
 var v = f.NewVar(typeof(int));
@@ -50,7 +50,7 @@ f.Create();
 int val = (int)f[null];
 Assert.AreEqual(val, 3);
 ```
-- Supports Referance operator
+- Supports Referance Operator
 ```
 StaticMethod f = new StaticMethod(typeof(int));
 var a = f.NewVar(typeof(int));
