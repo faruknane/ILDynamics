@@ -5,6 +5,24 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
+
+    public class StaticMethod<T> : StaticMethod
+    {
+        public StaticMethod() : base(typeof(T))
+        {
+
+        }
+
+        public new T this[params object[] objs]
+        {
+            get
+            {
+                return (T)base[objs];
+            }
+        }
+
+    }
+
     public class StaticMethod
     {
         public Dictionary<Param, int> ParameterIndex { get; }

@@ -10,7 +10,7 @@ namespace ILDynamics.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            StaticMethod f = new StaticMethod(typeof(int));
+            StaticMethod<int> f = new StaticMethod<int>();
             var p = f.NewParam(typeof(int));
             var v = f.NewVar(typeof(int));
 
@@ -20,14 +20,14 @@ namespace ILDynamics.Tests
 
             f.Create();
 
-            int val = (int)f[10]; // execute the method!
+            int val = f[10]; // execute the method!
             Assert.AreEqual(val, 25);
         }
 
         [TestMethod]
         public void TestMethod2()
         {
-            StaticMethod f = new StaticMethod(typeof(int));
+            StaticMethod<int> f = new StaticMethod<int>();
             var v = f.NewVar(typeof(int));
 
             v.Assign(f.Sum(f.Constant(2), f.Constant(3)));
@@ -38,14 +38,14 @@ namespace ILDynamics.Tests
 
             f.Create();
 
-            int val = (int)f[10];
+            int val = f[10];
             Assert.AreEqual(val, 15);
         }
 
         [TestMethod]
         public void TestRef()
         {
-            StaticMethod f = new StaticMethod(typeof(int));
+            StaticMethod<int> f = new StaticMethod<int>();
             var a = f.NewVar(typeof(int));
             a.Assign(f.Constant(5));
 
@@ -55,14 +55,14 @@ namespace ILDynamics.Tests
 
             f.Create();
 
-            int val = (int)f[null];
+            int val = f[null];
             Assert.AreEqual(val, 3);
         }
 
         [TestMethod]
         public void TestRef2()
         {
-            StaticMethod f = new StaticMethod(typeof(int));
+            StaticMethod<int> f = new StaticMethod<int>();
             var a = f.NewVar(typeof(int));
             a.Assign(f.Constant(5));
 
@@ -79,7 +79,7 @@ namespace ILDynamics.Tests
 
             f.Create();
 
-            int val = (int)f[null];
+            int val = f[null];
             Assert.AreEqual(val, 8);
         }
     }
