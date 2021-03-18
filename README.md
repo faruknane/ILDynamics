@@ -51,7 +51,7 @@ int val = f[null];
 Assert.AreEqual(val, 3);
 ```
 - Supports Referance Operator
-```
+```csharp
 StaticMethod<int> f = new StaticMethod<int>();
 var a = f.NewVar(typeof(int));
 a.Assign(f.Constant(5));
