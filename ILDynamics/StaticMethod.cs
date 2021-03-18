@@ -133,6 +133,11 @@ namespace ILDynamics
             return new Param(this, t);
         }
 
+        public Param NewParam<T>()
+        {
+            return new Param(this, typeof(T));
+        }
+
         public virtual int NewVar(Var iLVariable)
         {
             if (VariableIndex.ContainsKey(iLVariable))
@@ -141,6 +146,10 @@ namespace ILDynamics
             OpCodes.DeclareVariable(iLVariable.Type);
             VariableTypes.Add(iLVariable.Type);
             return VariableIndex[iLVariable] = VariableIndex.Count;
+        }
+        public Var NewVar<T>()
+        {
+            return new Var(this, typeof(T));
         }
 
         public Var NewVar(Type t)
