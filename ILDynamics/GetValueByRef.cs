@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class GetValueByRef : ILObject
+    public class ValueByRef : ILObject
     {
         public StaticMethod ILFunction { get; private set; }
         public Type Type;
         public ILObject Object;
 
-        public GetValueByRef(StaticMethod f, ILObject obj, Type t)
+        public ValueByRef(StaticMethod f, ILObject obj, Type t)
         {
             this.ILFunction = f;
             this.Type = t;

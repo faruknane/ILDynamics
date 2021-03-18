@@ -73,12 +73,12 @@ namespace ILDynamics
             return new OperatorPlus(this, objs);
         }
 
-        public ILObject GetValueByRef(ILObject obj, Type t)
+        public ILObject ValueByRef(ILObject obj, Type t)
         {
-            return new GetValueByRef(this, obj, t);
+            return new ValueByRef(this, obj, t);
         }
 
-        public RefVar CreateReference(IReffable v)
+        public RefVar Reference(IReffable v)
         {
             return new RefVar(this, v);
         }
