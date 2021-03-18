@@ -4,7 +4,6 @@ namespace ILDynamics
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             Method f = new Method<int>();
