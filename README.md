@@ -14,7 +14,7 @@ f.Return(f.Sum(v, p));
 
 var method = f.Create();
 
-int val = (int)method.Invoke(null, new object[] { 10 }); 
+int val = (int)f[10]; // execute the method!
 Assert.AreEqual(val, 25);
 ```
 
@@ -31,7 +31,7 @@ f.Return(f.Sum(v, p));
 
 var method = f.Create();
 
-int val = (int)method.Invoke(null, new object[] { 10 });
+int val = (int)f[10];
 Assert.AreEqual(val, 15);
 ```
 
@@ -47,6 +47,6 @@ f.Return(a);
 
 var method = f.Create();
 
-int val = (int)method.Invoke(null, new object[] { });
+int val = (int)f[null];
 Assert.AreEqual(val, 3);
 ```
