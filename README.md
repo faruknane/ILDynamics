@@ -12,7 +12,7 @@ v.Assign(f.Sum(p, f.Constant(2), f.Constant(3)));
 
 f.Return(f.Sum(v, p));
 
-var method = f.Create();
+f.Create();
 
 int val = (int)f[10]; // execute the method!
 Assert.AreEqual(val, 25);
@@ -29,7 +29,7 @@ var p = f.NewParameter(typeof(int));
 
 f.Return(f.Sum(v, p));
 
-var method = f.Create();
+f.Create();
 
 int val = (int)f[10];
 Assert.AreEqual(val, 15);
@@ -45,7 +45,7 @@ var b = f.Reference(a);
 b.RefAssign(f.Constant(3));
 f.Return(a);
 
-var method = f.Create();
+f.Create();
 
 int val = (int)f[null];
 Assert.AreEqual(val, 3);
