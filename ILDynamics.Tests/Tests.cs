@@ -18,7 +18,7 @@ namespace ILDynamics.Tests
 
             f.Return(f.Sum(v, p));
 
-            var method = f.Create();
+            f.Create();
 
             int val = (int)f[10]; // execute the method!
             Assert.AreEqual(val, 25);
@@ -36,7 +36,7 @@ namespace ILDynamics.Tests
 
             f.Return(f.Sum(v, p));
 
-            var method = f.Create();
+            f.Create();
 
             int val = (int)f[10];
             Assert.AreEqual(val, 15);
@@ -53,7 +53,7 @@ namespace ILDynamics.Tests
             b.RefAssign(f.Constant(3));
             f.Return(a);
 
-            var method = f.Create();
+            f.Create();
 
             int val = (int)f[null];
             Assert.AreEqual(val, 3);
