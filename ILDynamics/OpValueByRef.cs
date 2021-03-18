@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class ValueByRef : ILObject
+    public class OpValueByRef : ILObject
     {
         public StaticMethod ILFunction { get; private set; }
         public IReffable Object;
 
-        public ValueByRef(StaticMethod f, IReffable obj)
+        public OpValueByRef(StaticMethod f, IReffable obj)
         {
             this.ILFunction = f;
             this.Object = obj;

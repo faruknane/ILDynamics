@@ -83,20 +83,25 @@ namespace ILDynamics
 
         public ILObject Sum(params ILObject[] objs)
         {
-            return new OperatorPlus(this, objs);
+            return new OpPlus(this, objs);
         }
 
-        public ILObject ValueByRef(IReffable obj)
+        public ILObject GetValueByRef(IReffable obj)
         {
-            return new ValueByRef(this, obj);
+            return new OpValueByRef(this, obj);
         }
 
-        public RefVar Reference(IReffable v)
+        public ILObject GetRefByVar(IReffable obj)
+        {
+            return new OpRefByVar(obj);
+        }
+
+        public RefVar NewRefVar(IReffable v)
         {
             return new RefVar(this, v);
         }
 
-        public virtual int NewParameter(Param ilParameter)
+        public virtual int NewParam(Param ilParameter)
         {
             if(ParameterIndex.ContainsKey(ilParameter))
                 throw new Exception("You can't add the same parameter twice!");
@@ -105,12 +110,12 @@ namespace ILDynamics
             return ParameterIndex[ilParameter] = ParameterIndex.Count;
         }
 
-        public Param NewParameter(Type t)
+        public Param NewParam(Type t)
         {
             return new Param(this, t);
         }
 
-        public virtual int NewVariable(Var iLVariable)
+        public virtual int NewVar(Var iLVariable)
         {
             if (VariableIndex.ContainsKey(iLVariable))
                 throw new Exception("You can't add the same variable twice!");
@@ -120,7 +125,7 @@ namespace ILDynamics
             return VariableIndex[iLVariable] = VariableIndex.Count;
         }
 
-        public Var NewVariable(Type t)
+        public Var NewVar(Type t)
         {
             return new Var(this, t);
         }

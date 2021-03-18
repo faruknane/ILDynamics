@@ -8,12 +8,12 @@ namespace ILDynamics
         static void Main(string[] args)
         {
             StaticMethod f = new StaticMethod(typeof(int));
-            var a = f.NewVariable(typeof(int));
+            var a = f.NewVar(typeof(int));
             a.Assign(f.Constant(5));
 
-            var b = f.Reference(a);
+            var b = f.NewRefVar(a);
             b.RefAssign(f.Constant(3));
-            f.Return(f.ValueByRef(b));
+            f.Return(f.GetValueByRef(b));
 
             var method = f.Create();
 

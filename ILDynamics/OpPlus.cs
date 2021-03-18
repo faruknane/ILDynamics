@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class OperatorPlus : ILObject
+    public class OpPlus : ILObject
     {
         public StaticMethod ILFunction { get; private set; }
         public ILObject[] Values;
-        public OperatorPlus(StaticMethod f, params ILObject[] values)
+        public OpPlus(StaticMethod f, params ILObject[] values)
         {
             this.ILFunction = f;
             this.Values = values;

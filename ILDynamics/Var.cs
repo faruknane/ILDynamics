@@ -13,7 +13,7 @@ namespace ILDynamics
         {
             this.ILFunction = function;
             this.Type = type;
-            this.Index = this.ILFunction.NewVariable(this);
+            this.Index = this.ILFunction.NewVar(this);
         }
 
         public void LoadAddress()

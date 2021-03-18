@@ -8,15 +8,18 @@ namespace ILDynamics
 {
     public class RefVar : Var, IReffable
     {
-        public IReffable Var;
         public Type VarType;
 
         public RefVar(StaticMethod method, IReffable v) : base(method, PointerOf(v.Type))
         {
-            this.Var = v;
             this.VarType = v.Type;
             v.LoadAddress();
             this.Store();
+        }
+
+        public RefVar(StaticMethod method, Type t) : base(method, PointerOf(t))
+        {
+            this.VarType = t;
         }
 
         public void RefAssign(ILObject val)
