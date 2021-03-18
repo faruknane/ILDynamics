@@ -41,7 +41,7 @@ StaticMethod f = new StaticMethod(typeof(int));
 var a = f.NewVariable(typeof(int));
 a.Assign(f.Constant(5));
 
-var b = f.CreateReference(a);
+var b = f.Reference(a);
 b.RefAssign(f.Constant(3));
 f.Return(a);
 
