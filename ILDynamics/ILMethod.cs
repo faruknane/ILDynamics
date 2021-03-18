@@ -78,12 +78,7 @@ namespace ILDynamics
             return new ILGetValueByRef(this, obj, t);
         }
 
-        public ILRefVar CreateReference(ILVar v)
-        {
-            return new ILRefVar(this, v);
-        }
-
-        public ILRefVar CreateReference(ILParam v)
+        public ILRefVar CreateReference(ILReffable v)
         {
             return new ILRefVar(this, v);
         }

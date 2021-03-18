@@ -8,10 +8,10 @@ namespace ILDynamics
 {
     public class ILRefVar : ILVar, ILReffable
     {
-        public ILObject Var;
+        public ILReffable Var;
         public Type VarType;
 
-        public ILRefVar(ILMethod method, ILVar v) : base(method, PointerOf(v.Type))
+        public ILRefVar(ILMethod method, ILReffable v) : base(method, PointerOf(v.Type))
         {
             this.Var = v;
             this.VarType = v.Type;
@@ -19,13 +19,6 @@ namespace ILDynamics
             this.Store();
         }
 
-        public ILRefVar(ILMethod method, ILParam v) : base(method, PointerOf(v.Type))
-        {
-            this.Var = v;
-            this.VarType = v.Type;
-            v.LoadAddress();
-            this.Store();
-        }
 
         public void RefAssign(ILObject val)
         {
