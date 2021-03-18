@@ -7,17 +7,22 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class ILParameter : ILObject
+    public class ILParam : ILObject, ILReffable
     {
         public ILMethod ILFunction { get; private set; }
         public readonly int Index;
         public Type Type { get; private set; }
 
-        public ILParameter(ILMethod function, Type type)
+        public ILParam(ILMethod function, Type type)
         {
             this.ILFunction = function;
             this.Type = type;
             this.Index = this.ILFunction.NewParameter(this);
+        }
+
+        public void LoadAddress()
+        {
+            ILFunction.OpCodes.Emit(OpCodes.Ldarga_S, Index);
         }
 
         public override void Load()

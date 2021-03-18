@@ -7,9 +7,9 @@ namespace ILDynamics
 {
     public class ILMethod
     {
-        public Dictionary<ILParameter, int> ParameterIndex { get; }
+        public Dictionary<ILParam, int> ParameterIndex { get; }
         public List<Type> ParameterTypes { get; }
-        public Dictionary<ILVariable, int> VariableIndex { get; }
+        public Dictionary<ILVar, int> VariableIndex { get; }
         public List<Type> VariableTypes { get; }
 
         internal ILOpCodes OpCodes;
@@ -19,9 +19,9 @@ namespace ILDynamics
         public ILMethod(Type returntype)
         {
             ParameterTypes = new List<Type>();
-            ParameterIndex = new Dictionary<ILParameter, int>();
+            ParameterIndex = new Dictionary<ILParam, int>();
 
-            VariableIndex = new Dictionary<ILVariable, int>();
+            VariableIndex = new Dictionary<ILVar, int>();
             VariableTypes = new List<Type>();
             OpCodes = new ILOpCodes();
 
@@ -78,7 +78,17 @@ namespace ILDynamics
             return new ILGetValueByRef(this, obj, t);
         }
 
-        public virtual int NewParameter(ILParameter ilParameter)
+        public ILRefVar CreateReference(ILVar v)
+        {
+            return new ILRefVar(this, v);
+        }
+
+        public ILRefVar CreateReference(ILParam v)
+        {
+            return new ILRefVar(this, v);
+        }
+
+        public virtual int NewParameter(ILParam ilParameter)
         {
             if(ParameterIndex.ContainsKey(ilParameter))
                 throw new Exception("You can't add the same parameter twice!");
@@ -87,12 +97,12 @@ namespace ILDynamics
             return ParameterIndex[ilParameter] = ParameterIndex.Count;
         }
 
-        public ILParameter NewParameter(Type t)
+        public ILParam NewParameter(Type t)
         {
-            return new ILParameter(this, t);
+            return new ILParam(this, t);
         }
 
-        public virtual int NewVariable(ILVariable iLVariable)
+        public virtual int NewVariable(ILVar iLVariable)
         {
             if (VariableIndex.ContainsKey(iLVariable))
                 throw new Exception("You can't add the same variable twice!");
@@ -102,9 +112,9 @@ namespace ILDynamics
             return VariableIndex[iLVariable] = VariableIndex.Count;
         }
 
-        public ILVariable NewVariable(Type t)
+        public ILVar NewVariable(Type t)
         {
-            return new ILVariable(this, t);
+            return new ILVar(this, t);
         }
     }
 }
