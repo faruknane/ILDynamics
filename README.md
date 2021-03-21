@@ -50,7 +50,7 @@ f.Create();
 int val = f[null];
 Assert.AreEqual(val, 3);
 ```
-- Supports Referance Operator
+- Supports Reference Operator
 ```csharp
 Method<int> f = new Method<int>();
 Var a = f.NewVar<int>();
