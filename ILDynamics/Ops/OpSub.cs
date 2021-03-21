@@ -9,13 +9,11 @@ namespace ILDynamics.Ops
 {
     public class OpSub : ILObject
     {
-        public Method ILFunction { get; private set; }
 
         public ILObject Val1, Val2;
 
-        public OpSub(Method f, ILObject val1, ILObject val2)
+        public OpSub(Method m, ILObject val1, ILObject val2) : base(m)
         {
-            this.ILFunction = f;
             this.Val1 = val1;
             this.Val2 = val2;
         }
@@ -24,7 +22,7 @@ namespace ILDynamics.Ops
         {
             Val1.Load();
             Val2.Load();
-            ILFunction.OpCodes.Emit(OpCodes.Sub);
+            Method.OpCodes.Emit(OpCodes.Sub);
         }
 
         public override void Store()

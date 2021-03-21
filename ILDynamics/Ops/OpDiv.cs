@@ -9,13 +9,10 @@ namespace ILDynamics.Ops
 {
     public class OpDiv : ILObject
     {
-        public Method ILFunction { get; private set; }
-
         public ILObject Val1, Val2;
 
-        public OpDiv(Method f, ILObject val1, ILObject val2)
+        public OpDiv(Method m, ILObject val1, ILObject val2) : base(m)
         {
-            this.ILFunction = f;
             this.Val1 = val1;
             this.Val2 = val2;
         }
@@ -24,7 +21,7 @@ namespace ILDynamics.Ops
         {
             Val1.Load();
             Val2.Load();
-            ILFunction.OpCodes.Emit(OpCodes.Div);
+            Method.OpCodes.Emit(OpCodes.Div);
         }
 
         public override void Store()

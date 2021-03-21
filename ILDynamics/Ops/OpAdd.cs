@@ -9,11 +9,9 @@ namespace ILDynamics.Ops
 {
     public class OpAdd : ILObject
     {
-        public Method ILFunction { get; private set; }
         public ILObject[] Values;
-        public OpAdd(Method f, params ILObject[] values)
+        public OpAdd(Method m, params ILObject[] values) : base(m)
         {
-            this.ILFunction = f;
             this.Values = values;
         }
         
@@ -25,7 +23,7 @@ namespace ILDynamics.Ops
             {
                 var item = Values[i];
                 item.Load();
-                ILFunction.OpCodes.Emit(OpCodes.Add);
+                Method.OpCodes.Emit(OpCodes.Add);
             }
         }
 

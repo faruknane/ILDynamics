@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace ILDynamics
@@ -59,6 +60,13 @@ namespace ILDynamics
         }
 
         public void Emit(OpCode op, double arg)
+        {
+            OpList.Add(new ILPerformableOpCode((ILGenerator il) => {
+                il.Emit(op, arg);
+            }));
+        }
+
+        public void Emit(OpCode op, MethodInfo arg)
         {
             OpList.Add(new ILPerformableOpCode((ILGenerator il) => {
                 il.Emit(op, arg);

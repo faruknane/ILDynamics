@@ -9,11 +9,9 @@ namespace ILDynamics.Ops
 {
     public class OpMul : ILObject
     {
-        public Method ILFunction { get; private set; }
         public ILObject[] Values;
-        public OpMul(Method f, params ILObject[] values)
+        public OpMul(Method m, params ILObject[] values) : base(m)
         {
-            this.ILFunction = f;
             this.Values = values;
         }
 
@@ -25,7 +23,7 @@ namespace ILDynamics.Ops
             {
                 var item = Values[i];
                 item.Load();
-                ILFunction.OpCodes.Emit(OpCodes.Mul);
+                Method.OpCodes.Emit(OpCodes.Mul);
             }
         }
 

@@ -2,21 +2,28 @@
 
 namespace ILDynamics
 {
+
     class Program
     {
+
+        public static string F(int a)
+        {
+            string res = a.ToString();
+            return res;
+        }
+
         static void Main(string[] args)
         {
-            Method f = new Method<int>();
-            var a = f.NewVar(typeof(int));
-            a.Assign(f.Constant(5));
+            Method<string> f = new Method<string>();
+            var a = f.NewParam<int>();
 
-            var b = f.NewRefVar(a);
-            b.RefAssign(f.Constant(3));
-            f.Return(f.GetValueByRef(b));
+            var mmm = typeof(int).GetMethod("ToString", Array.Empty<Type>());
 
-            var method = f.Create();
+            f.Return(a.Call(mmm));
 
-            int val = (int)method.Invoke(null, new object[] { });
+            f.Create();
+
+            string val = f[5];
             Console.WriteLine(val);
         }
     }

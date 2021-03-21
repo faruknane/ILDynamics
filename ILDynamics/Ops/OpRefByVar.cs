@@ -8,8 +8,9 @@ namespace ILDynamics.Operators
 {
     public class OpRefByVar : ILObject
     {
-        public IReffable Var;
-        public OpRefByVar(IReffable v)
+        public RefableObject Var;
+
+        public OpRefByVar(RefableObject v) : base(v.Method)
         {
             this.Var = v;
         }

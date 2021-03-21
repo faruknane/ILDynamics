@@ -106,5 +106,17 @@ namespace ILDynamics.Tests
             int val = f[null];
             Assert.AreEqual(val, 8);
         }
+
+        [TestMethod]
+        public void TestOpCall1()
+        {
+            Method<string> f = new Method<string>();
+            var a = f.NewParam<int>();
+            var mmm = typeof(int).GetMethod("ToString", Array.Empty<Type>());
+            f.Return(a.Call(mmm));
+            f.Create();
+            string val = f[5];
+            Assert.AreEqual(val, "5");
+        }
     }
 }

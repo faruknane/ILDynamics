@@ -9,21 +9,19 @@ namespace ILDynamics
 {
     public class Constant<T> : ILObject
     {
-        public Method ILFunction { get; private set; }
         public Type Type { get; private set; }
 
         public readonly T Value;
 
-        public Constant(Method f, T val)
+        public Constant(Method m, T val) : base(m)
         {
-            ILFunction = f;
             Type = typeof(T);
             Value = val;
         }
 
         public override void Load()
         {
-            ILHelper.LoadConstant<T>(ILFunction.OpCodes, Value);
+            ILHelper.LoadConstant<T>(Method.OpCodes, Value);
         }
 
         public override void Store()

@@ -9,19 +9,17 @@ namespace ILDynamics.Ops
 {
     public class OpNeg : ILObject
     {
-        public Method ILFunction { get; private set; }
         public ILObject Val;
 
-        public OpNeg(Method f, ILObject val)
+        public OpNeg(Method m, ILObject val) : base(m)
         {
-            this.ILFunction = f;
             this.Val = val;
         }
 
         public override void Load()
         {
             this.Val.Load();
-            ILFunction.OpCodes.Emit(OpCodes.Neg);
+            Method.OpCodes.Emit(OpCodes.Neg);
         } 
 
         public override void Store()

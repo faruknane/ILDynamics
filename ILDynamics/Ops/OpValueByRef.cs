@@ -8,19 +8,25 @@ namespace ILDynamics.Operators
 {
     public class OpValueByRef : ILObject
     {
-        public Method ILFunction { get; private set; }
-        public IReffable Object;
+        public ILObject Object;
+        public Type ObjectType;
 
-        public OpValueByRef(Method f, IReffable obj)
+        public OpValueByRef(Method m, ILObject obj, Type t) : base(m)
         {
-            this.ILFunction = f;
             this.Object = obj;
+            this.ObjectType = t;
+        }
+
+        public OpValueByRef(Method m, RefableObject obj) : base(m)
+        {
+            this.Object = obj;
+            this.ObjectType = obj.Type;
         }
 
         public override void Load()
         {
             Object.Load();
-            ILHelper.LoadValueByRef(ILFunction.OpCodes, this.Object.Type);
+            ILHelper.LoadValueByRef(Method.OpCodes, this.ObjectType);
         }
 
         public override void Store()

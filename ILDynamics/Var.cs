@@ -3,32 +3,29 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
-    public class Var : ILObject, IReffable
+    public class Var : RefableObject
     {
-        public Method ILFunction { get; private set; }
         public readonly int Index;
-        public Type Type { get; private set; }
 
-        public Var(Method function, Type type)
+        public Var(Method m, Type type) : base(m)
         {
-            this.ILFunction = function;
             this.Type = type;
-            this.Index = this.ILFunction.NewVar(this);
+            this.Index = this.Method.NewVar(this);
         }
 
-        public void LoadAddress()
+        public override void LoadAddress()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Ldloca_S, Index);
+            Method.OpCodes.Emit(OpCodes.Ldloca_S, Index);
         }
 
         public override void Load()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Ldloc_S, Index);
+            Method.OpCodes.Emit(OpCodes.Ldloc_S, Index);
         }
 
         public override void Store()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Stloc_S, Index);
+            Method.OpCodes.Emit(OpCodes.Stloc_S, Index);
         }
 
     }

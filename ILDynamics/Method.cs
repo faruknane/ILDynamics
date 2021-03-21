@@ -121,17 +121,17 @@ namespace ILDynamics
             return new OpDiv(this, val1, val2);
         }
 
-        public ILObject GetValueByRef(IReffable obj)
+        public ILObject GetValueByRef(RefableObject obj)
         {
             return new OpValueByRef(this, obj);
         }
 
-        public ILObject GetRefByVar(IReffable obj)
+        public ILObject GetRefByVar(RefableObject obj)
         {
             return new OpRefByVar(obj);
         }
 
-        public RefVar NewRefVar(IReffable v)
+        public RefVar NewRefVar(RefableObject v)
         {
             return new RefVar(this, v);
         }

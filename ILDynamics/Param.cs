@@ -7,32 +7,29 @@ using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public class Param : ILObject, IReffable
+    public class Param : RefableObject
     {
-        public Method ILFunction { get; private set; }
         public readonly int Index;
-        public Type Type { get; private set; }
 
-        public Param(Method function, Type type)
+        public Param(Method m, Type type) : base(m)
         {
-            this.ILFunction = function;
             this.Type = type;
-            this.Index = this.ILFunction.NewParam(this);
+            this.Index = this.Method.NewParam(this);
         }
 
-        public void LoadAddress()
+        public override void LoadAddress()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Ldarga_S, Index);
+            Method.OpCodes.Emit(OpCodes.Ldarga_S, Index);
         }
 
         public override void Load()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Ldarg_S, Index);
+            Method.OpCodes.Emit(OpCodes.Ldarg_S, Index);
         }
 
         public override void Store()
         {
-            ILFunction.OpCodes.Emit(OpCodes.Starg_S, Index);
+            Method.OpCodes.Emit(OpCodes.Starg_S, Index);
         }
 
     }
