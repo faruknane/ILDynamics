@@ -112,11 +112,12 @@ namespace ILDynamics.Tests
         {
             Method<string> f = new Method<string>();
             var a = f.NewParam<int>();
-            var mmm = typeof(int).GetMethod("ToString", Array.Empty<Type>());
-            f.Return(a.Call(mmm));
+            var tostr = typeof(int).GetMethod("ToString", Array.Empty<Type>());
+            f.Return(a.Call(tostr));
             f.Create();
             string val = f[5];
             Assert.AreEqual(val, "5");
         }
+
     }
 }
