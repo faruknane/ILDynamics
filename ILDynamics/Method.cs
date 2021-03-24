@@ -7,7 +7,6 @@ using System.Reflection.Emit;
 
 namespace ILDynamics
 {
-
     public class Method<T> : Method
     {
         public Method() : base(typeof(T))

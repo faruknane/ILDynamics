@@ -1,14 +1,49 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ILDynamics
 {
-    public static class ILHelper
+    public static partial class ILHelper
     {
+        public static OpCode GetOpCodeByValue(short val)
+        {
+            FieldInfo[] fields = typeof(OpCodes).GetFields();
+            foreach (var f in fields)
+            {
+                if (f.FieldType == typeof(OpCode))
+                {
+                    if (f.GetValue(null) is OpCode code)
+                        if (code.Value == val)
+                            return code;
+                }
+            }
+            throw new Exception("Not Found!");
+        }
+
+        public static OpCode GetOpCode(Span<byte> arr, ref int newoffset)
+        {
+            if (arr[0] >= 248)
+            {
+                if (arr.Length <= 1)
+                    throw new Exception("Damaged IL Code!");
+
+                newoffset += 2;
+                short num = BinaryPrimitives.ReadInt16BigEndian(arr);
+                return GetOpCodeByValue(num);
+            }
+            else
+            {
+                newoffset += 1;
+                return GetOpCodeByValue(arr[0]);
+            }
+        }
+
         //todo need all primitives
         public static void LoadValueByRef(ILOpCodes codes, Type t)
         {

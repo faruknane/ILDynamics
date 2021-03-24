@@ -1,30 +1,39 @@
-﻿using System;
+﻿using ILDynamics.Resolver;
+using ILDynamics.Resolver.Filters;
+using System;
+using System.Buffers.Binary;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILDynamics
 {
 
-    class Program
+    public class Program
     {
-
-        public static string F(int a)
+        public static int A(int a)
         {
-            string res = a.ToString();
-            return res;
+            return B(a);
+        }
+
+        public static int B(int a)
+        {
+            return a + 5;
+        }
+
+        public static int C(int a)
+        {
+            return a * 5;
         }
 
         static void Main(string[] args)
         {
-            Method<string> f = new Method<string>();
-            var a = f.NewParam<int>();
+            var swapper = new MethodCallSwapper();
+            swapper.AddSwap(typeof(Program).GetMethod("B"), typeof(Program).GetMethod("C"));
+            var methodInfo = Resolver.Resolver.CopyMethod(typeof(Program).GetMethod("A"), swapper, new NoFilter());
 
-            var mmm = typeof(int).GetMethod("ToString", Array.Empty<Type>());
-
-            f.Return(a.Call(mmm));
-
-            f.Create();
-
-            string val = f[5];
-            Console.WriteLine(val);
+            Console.WriteLine((int)methodInfo.Invoke(null, new object[] { 5 }));
         }
     }
 
