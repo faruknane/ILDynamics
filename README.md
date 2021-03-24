@@ -72,3 +72,13 @@ f.Create();
 int val = f[null];
 Assert.AreEqual(val, 8);
 ```
+- Supports Instance Method Calls
+```csharp
+Method<string> f = new Method<string>();
+var a = f.NewParam<int>();
+var tostr = typeof(int).GetMethod("ToString", Array.Empty<Type>());
+f.Return(a.Call(tostr));
+f.Create();
+string val = f[5];
+Assert.AreEqual(val, "5");
+```
