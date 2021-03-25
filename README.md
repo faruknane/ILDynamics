@@ -1,5 +1,5 @@
 # ILDynamics
-A Library for dynamic method generation for .NET5!
+A Library for dynamic method generation purposes for .NET5!
 
 ## Features & Usages
 - Supports Static Method Creation
