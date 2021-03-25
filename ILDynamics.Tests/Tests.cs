@@ -119,5 +119,24 @@ namespace ILDynamics.Tests
             Assert.AreEqual(val, "5");
         }
 
+        public static int experiment1 = 5;
+        public static void Method1(int x)
+        {
+            Console.WriteLine(x);
+            experiment1 += x;
+        }
+
+        [TestMethod]
+        public void TestOpCall2()
+        {
+            Method f = new Method(null);
+            var p = f.NewParam<int>();
+            f.StaticCall(typeof(Tests).GetMethod("Method1"), p);
+            f.Return();
+            f.Create();
+            _ = f[3];
+            Assert.AreEqual(8, experiment1);
+        }
+
     }
 }

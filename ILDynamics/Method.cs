@@ -135,6 +135,11 @@ namespace ILDynamics
             return new RefVar(this, v);
         }
 
+        public void StaticCall(MethodInfo objm, params ILObject[] parameters)
+        {
+            new OpCall(this, null, objm, parameters).Load();
+        }
+
         public virtual int NewParam(Param ilParameter)
         {
             if(ParameterIndex.ContainsKey(ilParameter))

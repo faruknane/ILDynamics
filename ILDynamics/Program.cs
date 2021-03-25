@@ -27,13 +27,23 @@ namespace ILDynamics
             return a * 5;
         }
 
+        public static int experiment1 = 5;
+        public static void Method1(int x)
+        {
+            experiment1 += x;
+        }
+
         static void Main(string[] args)
         {
-            var swapper = new MethodCallSwapper();
-            swapper.AddSwap(typeof(Program).GetMethod("B"), typeof(Program).GetMethod("C"));
-            var methodInfo = Resolver.Resolver.CopyMethod(typeof(Program).GetMethod("A"), swapper, new NoFilter());
-
-            Console.WriteLine((int)methodInfo.Invoke(null, new object[] { 5 }));
+            Method f = new Method(null);
+            var p = f.NewParam<int>();
+            f.StaticCall(typeof(Program).GetMethod("Method1"), p);
+            f.StaticCall(typeof(Console).GetMethod("WriteLine", new Type[] { typeof(int)}), p);
+            //crete a static variable that represents static outsider variables. 
+            f.Return();
+            f.Create();
+            _ = f[3];
+            Console.WriteLine(experiment1);
         }
     }
 
