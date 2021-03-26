@@ -29,7 +29,7 @@ namespace ILDynamics.Resolver
                 bool applied = false;
                 foreach (var filter in filters)
                 {
-                    applied = applied || filter.ApplyFilter(code, size, arr.AsSpan(i));
+                    applied = applied || filter.Apply(code, size, arr.AsSpan(i));
                     if (applied)
                         break;
                 }

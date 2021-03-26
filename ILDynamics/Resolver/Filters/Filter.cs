@@ -27,6 +27,6 @@ namespace ILDynamics.Resolver.Filters
             Initialized = true;
         }
 
-        public abstract bool ApplyFilter(OpCode opcode, int opsize, Span<byte> operands);
+        public abstract bool Apply(OpCode opcode, int opsize, Span<byte> operands);
     }
 }

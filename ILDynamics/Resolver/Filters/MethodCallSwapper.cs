@@ -54,7 +54,7 @@ namespace ILDynamics.Resolver.Filters
             }
         }
 
-        public override bool ApplyFilter(OpCode code, int operandsize, Span<byte> operands)
+        public override bool Apply(OpCode code, int operandsize, Span<byte> operands)
         {
             if (operandsize == 4 && (code.Equals(OpCodes.Call) || code.Equals(OpCodes.Callvirt) || code.Equals(OpCodes.Newobj)))
             {

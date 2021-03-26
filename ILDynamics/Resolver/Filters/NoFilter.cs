@@ -22,7 +22,7 @@ namespace ILDynamics.Resolver.Filters
         {
         }
 
-        public override bool ApplyFilter(OpCode code, int operandsize, Span<byte> operands)
+        public override bool Apply(OpCode code, int operandsize, Span<byte> operands)
         {
             if (operandsize == 4)
             {

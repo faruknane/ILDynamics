@@ -58,7 +58,7 @@ namespace ILDynamics.Resolver.Filters
             return NewIndices[index];
         }
 
-        public override bool ApplyFilter(OpCode code, int operandsize, Span<byte> operands)
+        public override bool Apply(OpCode code, int operandsize, Span<byte> operands)
         {
             if (ILHelper.IsArgS(code))
             {
