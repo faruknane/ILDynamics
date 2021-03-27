@@ -3,14 +3,14 @@ A Library for dynamic method operations!
 
 ## Features
 
-### Method Generation
+### Generation Dynamically Created Static Methods 
 - Dynamic Method Creation
 - Parameter and Variable Definition anywhere 
 - Reference Types
 - Reference Operator
 - Instance/Static Method Calls
 
-### Method Cloner
+### Cloning Methods by Applying Filtering
 The method cloning is possible with ILDynamics library. 
 #### Filters
 - **NoFilter:** Copies the current IL Code, no filter is applied.
