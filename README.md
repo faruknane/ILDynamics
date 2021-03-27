@@ -4,7 +4,7 @@ A Library for dynamic method operations!
 ## Features
 
 ### Method Generation
-- Static Method Creation
+- Dynamic Method Creation
 - Parameter and Variable Definition anywhere 
 - Reference Types
 - Reference Operator
@@ -18,7 +18,7 @@ The method cloning is possible with ILDynamics library.
 - **ParameterRemover:** Can remove unused parameters. (for removing closure parameter of Action and Func purposes)
 
 ## Usages
-- Static Method Creation
+- Dynamic Method Creation
 ```csharp
 Method<int> f = new Method<int>();
 var p = f.NewParam<int>();
