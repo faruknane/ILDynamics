@@ -11,7 +11,7 @@ A Library for dynamic method operations!
 - Instance/Static Method Calls
 
 ### Method Cloner
-The method cloning is possible with ILDynamics libary. 
+- The method cloning is possible with ILDynamics library. 
 #### Filters
 - **NoFilter:** Copies the current IL Code, no filter is applied.
 - **MethodCallSwapper:** Swaps some method calls in a method with other methods specified.
