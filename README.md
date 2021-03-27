@@ -15,7 +15,7 @@ The method cloning is possible with ILDynamics library.
 #### Filters
 - **NoFilter:** Copies the current IL Code, no filter is applied.
 - **MethodCallSwapper:** Swaps some method calls in a method with other methods specified.
-- **ParameterRemover:** Can remove unused parameters. (for purpose of removing closure parameter of Action and Func)
+- **ParameterRemover:** Can remove unused parameters. (for purpose of removing closure parameter of lamda functions)
 
 ## Usages
 - Dynamic Method Creation
