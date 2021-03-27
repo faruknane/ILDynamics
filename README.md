@@ -1,8 +1,24 @@
 # ILDynamics
 A Library for dynamic method generation purposes for .NET5!
 
-## Features & Usages
-- Supports Static Method Creation
+## Features
+
+### Method Generation
+- Static Method Creation
+- Parameter and Variable Definition anywhere 
+- Reference Types
+- Reference Operator
+- Instance/Static Method Calls
+
+### Method Cloner
+The method cloning is possible with ILDynamics libary. 
+#### Filters
+- **NoFilter:** Copies the current IL Code, no filter is applied.
+- **MethodCallSwapper:** Swaps some method calls in a method with other methods specified.
+- **ParameterRemover:** Can remove unused parameters. (for removing closure parameter of Action and Func purposes)
+
+## Usages
+- Static Method Creation
 ```csharp
 Method<int> f = new Method<int>();
 var p = f.NewParam<int>();
@@ -18,7 +34,7 @@ int val = f[10]; // execute the method!
 Assert.AreEqual(val, 25);
 ```
 
-- Supports Parameter and Variable Definition anywhere 
+- Parameter and Variable Definition anywhere 
 ```csharp
 Method<int> f = new Method<int>();
 var v = f.NewVar<int>();
@@ -35,7 +51,7 @@ int val = f[10];
 Assert.AreEqual(val, 15);
 ```
 
-- Supports Reference Types
+- Reference Types
 ```csharp
 Method<int> f = new Method<int>();
 Var a = f.NewVar<int>();
@@ -50,7 +66,7 @@ f.Create();
 int val = f[null];
 Assert.AreEqual(val, 3);
 ```
-- Supports Reference Operator
+- Reference Operator
 ```csharp
 Method<int> f = new Method<int>();
 Var a = f.NewVar<int>();
@@ -72,7 +88,7 @@ f.Create();
 int val = f[null];
 Assert.AreEqual(val, 8);
 ```
-- Supports Instance Method Calls
+- Instance Method Call
 ```csharp
 Method<string> f = new Method<string>();
 var a = f.NewParam<int>();
