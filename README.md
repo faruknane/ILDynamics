@@ -1,4 +1,4 @@
-# ILDynamics <img src="https://user-images.githubusercontent.com/37745467/113457878-a5b30c00-9419-11eb-9f75-3b0126ac31a6.png" width="48">
+# ILDynamics <img src="https://user-images.githubusercontent.com/37745467/113457878-a5b30c00-9419-11eb-9f75-3b0126ac31a6.png" width="36">
 A Library for dynamic method operations!
 
 ## Features
