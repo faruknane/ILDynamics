@@ -15,21 +15,6 @@ namespace ILDynamics
 
     public class Program
     {
-        public static int A(int a)
-        {
-            return B(a);
-        }
-
-        public static int B(int a)
-        {
-            return a + 5;
-        }
-
-        public static int C(int a)
-        {
-            return a * 5;
-        }
-
         public static int experiment1 = 5;
         public static void Method1(int x)
         {
