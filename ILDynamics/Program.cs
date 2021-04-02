@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using ILDynamics.MethodGen.Ops;
+using ILDynamics.MethodGen;
+using static ILDynamics.MethodGen.F;
 
 namespace ILDynamics
 {
@@ -36,11 +39,14 @@ namespace ILDynamics
         static void Main(string[] args)
         {
             Method f = new Method(null);
-            var p = f.NewParam<int>();
-            f.StaticCall(typeof(Program).GetMethod("Method1"), p);
-            f.StaticCall(typeof(Console).GetMethod("WriteLine", new Type[] { typeof(int)}), p);
-            //crete a static variable that represents static outsider variables. 
-            f.Return();
+            Param p = new Param<int>();
+            var seq = new OpSequence
+            (   
+                StaticCall(typeof(Program).GetMethod("Method1"), p),
+                StaticCall(typeof(Console).GetMethod("WriteLine", new Type[] { typeof(int)}), p),
+                Return()
+            );
+            seq.Load(f);
             f.Create();
             _ = f[3];
             Console.WriteLine(experiment1);

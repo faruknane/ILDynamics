@@ -5,24 +5,24 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics.Ops
+namespace ILDynamics.MethodGen.Ops
 {
-    public class OpNeg : ILObject
+    public class OpNeg : ILOp
     {
-        public ILObject Val;
+        public ILOp Val;
 
-        public OpNeg(Method m, ILObject val) : base(m)
+        public OpNeg(ILOp val) 
         {
             this.Val = val;
         }
 
-        public override void Load()
+        public override void Load(Method Method)
         {
-            this.Val.Load();
+            this.Val.Load(Method);
             Method.OpCodes.Emit(OpCodes.Neg);
         } 
 
-        public override void Store()
+        public override void Store(Method Method)
         {
             throw new NotImplementedException();
         }

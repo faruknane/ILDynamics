@@ -1,35 +1,36 @@
-﻿using System;
+﻿using ILDynamics.MethodGen.IL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics.Operators
+namespace ILDynamics.MethodGen.Ops
 {
-    public class OpValueByRef : ILObject
+    public class OpValueByRef : ILOp
     {
-        public ILObject Object;
+        public ILOp Object;
         public Type ObjectType;
 
-        public OpValueByRef(Method m, ILObject obj, Type t) : base(m)
+        public OpValueByRef(ILOp obj, Type t) 
         {
             this.Object = obj;
             this.ObjectType = t;
         }
 
-        public OpValueByRef(Method m, RefableObject obj) : base(m)
+        public OpValueByRef(RefableObject obj) 
         {
             this.Object = obj;
             this.ObjectType = obj.Type;
         }
 
-        public override void Load()
+        public override void Load(Method Method)
         {
-            Object.Load();
+            Object.Load(Method);
             ILHelper.LoadValueByRef(Method.OpCodes, this.ObjectType);
         }
 
-        public override void Store()
+        public override void Store(Method Method)
         {
             throw new NotImplementedException();
         }

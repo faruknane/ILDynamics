@@ -1,22 +1,24 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using ILDynamics;
+using ILDynamics.MethodGen.Ops;
+using ILDynamics.MethodGen;
+using static ILDynamics.MethodGen.F;
 
 namespace ILDynamics.Tests
 {
     [TestClass]
-    public class Tests
+    public class MethodGeneration
     {
         [TestMethod]
         public void TestAdd1()
         {
             Method<int> f = new Method<int>();
-            var p = f.NewParam<int>();
-            var v = f.NewVar<int>();
+            var p = new Param<int>();
+            var v = new Var<int>();
 
-            v.Assign(f.Add(p, f.Constant(2), f.Constant(3)));
+            v.Assign(Add(p, Constant(2), Constant(3))).Load(f);
 
-            f.Return(f.Add(v, p));
+            Return(Add(v, p)).Load(f);
 
             f.Create();
 
@@ -28,13 +30,13 @@ namespace ILDynamics.Tests
         public void TestAdd2()
         {
             Method<int> f = new Method<int>();
-            var v = f.NewVar<int>();
+            var v = new Var<int>();
 
-            v.Assign(f.Add(f.Constant(2), f.Constant(3)));
+            v.Assign(Add(Constant(2), Constant(3))).Load(f);
 
-            var p = f.NewParam<int>();
+            var p = new Param<int>();
 
-            f.Return(f.Add(v, p));
+            Return(Add(v, p)).Load(f);
 
             f.Create();
 
@@ -46,9 +48,9 @@ namespace ILDynamics.Tests
         public void TestSub1()
         {
             Method<int> f = new Method<int>();
-            var v = f.NewVar<int>();
-            v.Assign(f.Sub(f.Constant(2), f.Constant(3)));
-            f.Return(v);
+            var v = new Var<int>();
+            v.Assign(Sub(Constant(2), Constant(3))).Load(f);
+            Return(v).Load(f);
             f.Create();
             int val = f[null]; // execute the method!
             Assert.AreEqual(val, -1);
@@ -58,9 +60,9 @@ namespace ILDynamics.Tests
         public void TestSub2()
         {
             Method<int> f = new Method<int>();
-            var v = f.NewVar<int>();
-            v.Assign(f.Sub(f.Constant(2), f.Sub(f.Constant(5), f.Constant(3))));
-            f.Return(v);
+            var v = new Var<int>();
+            v.Assign(Sub(Constant(2), Sub(Constant(5), Constant(3)))).Load(f);
+            Return(v).Load(f);
             f.Create();
             int val = f[null]; // execute the method!
             Assert.AreEqual(val, 0);
@@ -70,12 +72,12 @@ namespace ILDynamics.Tests
         public void TestRef()
         {
             Method<int> f = new Method<int>();
-            Var a = f.NewVar<int>();
-            a.Assign(f.Constant(5));
+            Var a = new Var<int>();
+            a.Assign(Constant(5)).Load(f);
 
-            RefVar b = f.NewRefVar(a);
-            b.RefAssign(f.Constant(3));
-            f.Return(a);
+            RefVar b = new RefVar(a);
+            b.RefAssign(Constant(3)).Load(f);
+            Return(a).Load(f);
 
             f.Create();
 
@@ -87,19 +89,19 @@ namespace ILDynamics.Tests
         public void TestRefOp()
         {
             Method<int> f = new Method<int>();
-            Var a = f.NewVar<int>();
-            a.Assign(f.Constant(5));
+            Var a = new Var<int>();
+            a.Assign(Constant(5)).Load(f);
 
-            RefVar b = f.NewRefVar(a);
-            b.RefAssign(f.Constant(3));
+            RefVar b = new RefVar(a);
+            b.RefAssign(Constant(3)).Load(f);
 
-            Var c = f.NewVar<int>();
-            c.Assign(f.Constant(15));
+            Var c = new Var<int>();
+            c.Assign(Constant(15)).Load(f);
 
-            b.Assign(f.GetRefByVar(c));
-            b.RefAssign(f.Constant(5));
+            b.Assign(GetRefByVar(c)).Load(f);
+            b.RefAssign(Constant(5)).Load(f);
 
-            f.Return(f.Add(a, c));
+            Return(Add(a, c)).Load(f);
 
             f.Create();
 
@@ -111,9 +113,9 @@ namespace ILDynamics.Tests
         public void TestOpCall1()
         {
             Method<string> f = new Method<string>();
-            var a = f.NewParam<int>();
+            var a = new Param<int>();
             var tostr = typeof(int).GetMethod("ToString", Array.Empty<Type>());
-            f.Return(a.Call(tostr));
+            Return(a.Call(tostr)).Load(f);
             f.Create();
             string val = f[5];
             Assert.AreEqual(val, "5");
@@ -130,9 +132,9 @@ namespace ILDynamics.Tests
         public void TestOpCall2()
         {
             Method f = new Method(null);
-            var p = f.NewParam<int>();
-            f.StaticCall(typeof(Tests).GetMethod("Method1"), p);
-            f.Return();
+            var p = new Param<int>();
+            StaticCall(typeof(MethodGeneration).GetMethod("Method1"), p).Load(f);
+            Return().Load(f);
             f.Create();
             _ = f[3];
             Assert.AreEqual(8, experiment1);

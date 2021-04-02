@@ -6,33 +6,33 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics.Ops
+namespace ILDynamics.MethodGen.Ops
 {
-    public class OpCall : ILObject
+    public class OpCall : ILOp
     {
         public RefableObject Object;
         public MethodInfo MethodInfo;
-        public ILObject[] Parameters;
+        public ILOp[] Parameters;
 
-        public OpCall(Method m, RefableObject obj, MethodInfo mi, params ILObject[] parameters) : base(m)
+        public OpCall(RefableObject obj, MethodInfo mi, params ILOp[] parameters)
         {
             this.Object = obj;
             this.MethodInfo = mi;
             this.Parameters = parameters;
         }
 
-        public override void Load()
+        public override void Load(Method Method)
         {
             if(Object != null)
-                Object.LoadAddress();
+                Object.LoadAddress(Method);
 
             foreach (var item in Parameters)
-                item.Load();
+                item.Load(Method);
 
             Method.OpCodes.Emit(OpCodes.Call, MethodInfo);
         }
 
-        public override void Store()
+        public override void Store(Method Method)
         {
             throw new NotImplementedException();
         }

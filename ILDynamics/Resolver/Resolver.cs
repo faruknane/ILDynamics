@@ -1,4 +1,5 @@
-﻿using ILDynamics.Resolver.Filters;
+﻿using ILDynamics.MethodGen.IL;
+using ILDynamics.Resolver.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

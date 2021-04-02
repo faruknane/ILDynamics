@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ILDynamics.Compute\ILDynamics.Compute.csproj" />
     <ProjectReference Include="..\ILDynamics\ILDynamics.csproj" />
   </ItemGroup>
 

@@ -1,11 +1,12 @@
-﻿using ILDynamics.Operators;
-using ILDynamics.Ops;
+﻿using ILDynamics.MethodGen.Ops;
+using ILDynamics.MethodGen;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using ILDynamics.MethodGen.IL;
 
-namespace ILDynamics
+namespace ILDynamics.MethodGen
 {
     public class Method<T> : Method
     {
@@ -57,17 +58,6 @@ namespace ILDynamics
             }
         }
 
-        public void Return()
-        {
-            OpCodes.Emit(System.Reflection.Emit.OpCodes.Ret);
-        }
-
-        public void Return(ILObject v)
-        {
-            v.Load();
-            OpCodes.Emit(System.Reflection.Emit.OpCodes.Ret);
-        }
-
         public MethodInfo Create()
         {
             if (methodInfo != null)
@@ -95,51 +85,6 @@ namespace ILDynamics
             return methodInfo = dt.GetMethod("DynamicMethod");
         }
 
-        public ILObject Constant<T>(T v)
-        {
-            return new Constant<T>(this, v);
-        }
-
-        public ILObject Add(params ILObject[] objs)
-        {
-            return new OpAdd(this, objs);
-        }
-
-        public ILObject Sub(ILObject val1, ILObject val2)
-        {
-            return new OpSub(this, val1, val2);
-        }
-
-        public ILObject Mul(params ILObject[] objs)
-        {
-            return new OpMul(this, objs);
-        }
-
-        public ILObject Div(ILObject val1, ILObject val2)
-        {
-            return new OpDiv(this, val1, val2);
-        }
-
-        public ILObject GetValueByRef(RefableObject obj)
-        {
-            return new OpValueByRef(this, obj);
-        }
-
-        public ILObject GetRefByVar(RefableObject obj)
-        {
-            return new OpRefByVar(obj);
-        }
-
-        public RefVar NewRefVar(RefableObject v)
-        {
-            return new RefVar(this, v);
-        }
-
-        public void StaticCall(MethodInfo objm, params ILObject[] parameters)
-        {
-            new OpCall(this, null, objm, parameters).Load();
-        }
-
         public virtual int NewParam(Param ilParameter)
         {
             if(ParameterIndex.ContainsKey(ilParameter))
@@ -147,16 +92,6 @@ namespace ILDynamics
 
             ParameterTypes.Add(ilParameter.Type);
             return ParameterIndex[ilParameter] = ParameterIndex.Count;
-        }
-
-        public Param NewParam(Type t)
-        {
-            return new Param(this, t);
-        }
-
-        public Param NewParam<T>()
-        {
-            return new Param(this, typeof(T));
         }
 
         public virtual int NewVar(Var iLVariable)
@@ -167,15 +102,6 @@ namespace ILDynamics
             OpCodes.DeclareVariable(iLVariable.Type);
             VariableTypes.Add(iLVariable.Type);
             return VariableIndex[iLVariable] = VariableIndex.Count;
-        }
-        public Var NewVar<T>()
-        {
-            return new Var(this, typeof(T));
-        }
-
-        public Var NewVar(Type t)
-        {
-            return new Var(this, t);
         }
     }
 }
