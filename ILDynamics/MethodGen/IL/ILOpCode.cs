@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace ILDynamics
+namespace ILDynamics.MethodGen.IL
 {
 
     public class ILPerformableOpCode

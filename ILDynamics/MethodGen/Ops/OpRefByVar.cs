@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics.Operators
+namespace ILDynamics.MethodGen.Ops
 {
-    public class OpRefByVar : ILObject
+    public class OpRefByVar : ILOp
     {
         public RefableObject Var;
 
-        public OpRefByVar(RefableObject v) : base(v.Method)
+        public OpRefByVar(RefableObject v)
         {
             this.Var = v;
         }
 
-        public override void Load()
+        public override void Load(Method Method)
         {
-            this.Var.LoadAddress();
+            this.Var.LoadAddress(Method);
         }
 
-        public override void Store()
+        public override void Store(Method Method)
         {
             throw new NotImplementedException();
         }

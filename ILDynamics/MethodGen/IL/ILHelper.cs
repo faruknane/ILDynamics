@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ILDynamics.MethodGen;
+using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics
+namespace ILDynamics.MethodGen.IL
 {
     public static partial class ILHelper
     {

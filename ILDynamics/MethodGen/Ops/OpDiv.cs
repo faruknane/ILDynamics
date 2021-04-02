@@ -5,26 +5,26 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ILDynamics.Ops
+namespace ILDynamics.MethodGen.Ops
 {
-    public class OpDiv : ILObject
+    public class OpDiv : ILOp
     {
-        public ILObject Val1, Val2;
+        public ILOp Val1, Val2;
 
-        public OpDiv(Method m, ILObject val1, ILObject val2) : base(m)
+        public OpDiv(ILOp val1, ILOp val2)
         {
             this.Val1 = val1;
             this.Val2 = val2;
         }
 
-        public override void Load()
+        public override void Load(Method Method)
         {
-            Val1.Load();
-            Val2.Load();
+            Val1.Load(Method);
+            Val2.Load(Method);
             Method.OpCodes.Emit(OpCodes.Div);
         }
 
-        public override void Store()
+        public override void Store(Method Method)
         {
             throw new NotImplementedException();
         }
